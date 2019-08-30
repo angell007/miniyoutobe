@@ -6,6 +6,7 @@ use App\Video;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use \Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Auth;
 use Alert;
 
@@ -23,7 +24,9 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return response(Video::inRandomOrder()->paginate(100)->jsonSerialize(), Response::HTTP_OK);
+        if(\Request::ajax()){
+            return response(Video::inRandomOrder()->paginate(100)->jsonSerialize(), Response::HTTP_OK);
+        }
     }
 
     /**
@@ -88,8 +91,15 @@ class VideoController extends Controller
      */
     public function show($slug)
     {
-        $video = Video::where('title', $slug)->first();
-        return response($video->jsonSerialize(), Response::HTTP_OK);
+        if (\Request::ajax()) {
+            $video = Video::where('slug', $slug)->first();
+            return response($video->jsonSerialize(), Response::HTTP_OK);
+        }
+
+        return response()
+            ->view('video.show');
+            // ->json(['slug' => $slug]);
+
     }
 
     /**

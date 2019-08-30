@@ -26,12 +26,12 @@ Vue.use(BootstrapVue)
 window.Vue = require('vue');
 
 
-Vue.component('app-component', require('./components/AppComponent.vue').default);
 Vue.component('video-component', require('./components/VideoComponent.vue').default);
 Vue.component('loading-component', require('vue-infinite-loading').default);
-Vue.component('sidebar-component', require('./components/SidebarComponent.vue').default);
 Vue.component('jumbotron-component', require('./components/JumbotronComponent.vue').default);
 Vue.component('new-component', require('./components/NewComponent.vue').default);
+Vue.component('onlyvideo-component', require('./components/OnlyVideoComponent.vue').default);
+
 
 
 const app = new Vue({

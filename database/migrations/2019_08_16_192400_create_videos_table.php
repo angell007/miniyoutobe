@@ -20,6 +20,7 @@ class CreateVideosTable extends Migration
             $table->string('description');
             $table->string('status');
             $table->string('image');
+            $table->string('slug')->unique();
             $table->string('video_path');
             $table->timestamps();
         });
